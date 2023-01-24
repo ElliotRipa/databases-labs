@@ -11,7 +11,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="0fs2ln66" />
@@ -33,6 +33,9 @@
     "WebServerToolWindowFactoryState": "false",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "last_opened_file_path": "C:/CMDer/databases/labb1/tables.sql",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "database.query.execution"
   },
   "keyToStringList": {
@@ -63,6 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1674565369057</updated>
       <workItem from="1674565370394" duration="5565000" />
+      <workItem from="1674587154431" duration="67000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit.">
       <created>1674586509360</created>
