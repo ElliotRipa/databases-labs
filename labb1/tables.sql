@@ -73,7 +73,8 @@ CREATE TABLE Classified(
     PRIMARY KEY(course, classification),
 
     FOREIGN KEY(course) REFERENCES Courses(code),
-    FOREIGN KEY(classification) REFERENCES Classifications(name)   --Weird considering multiple classifications possible.
+    FOREIGN KEY(classification) REFERENCES Classifications(name)
+    --Weird considering multiple classifications possible.
 );
 
 
