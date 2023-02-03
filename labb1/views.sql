@@ -17,7 +17,7 @@ CREATE VIEW FinishedCourses AS
 
 CREATE VIEW PassedCourses AS
 
-    SELECT * FROM FinishedCourses
+    SELECT student, course, credits FROM FinishedCourses
     WHERE grade != 'U';
 
 
@@ -44,16 +44,14 @@ CREATE VIEW UnreadMandatory AS
     INNER JOIN BasicInformation bi on mb.program = bi.program and mb.branch = bi.branch
     WHERE bi.idnr NOT IN (SELECT pc.student FROM PassedCourses pc);
 
-/*
+
+/*CREATE VIEW points AS*/
+
+
+
 CREATE VIEW PathToGraduation AS
 
-    SELECT bi.idnr, totalCredits, mandatoryLeft, mathCredits, researchCredits, qualified
-
+    SELECT bi.idnr AS student, GREATEST(0,SUM(pc.credits)) AS totalPoints /*, mandatoryLeft, mathCredits, researchCredits, qualified */
     FROM BasicInformation bi
-    LEFT JOIN
-
-
-    )
-    FROM courses c
-    WHERE SUM(c.credits) as sum
-*/
+    LEFT JOIN PassedCourses pc ON bi.idnr = pc.student
+    GROUP BY bi.idnr;
