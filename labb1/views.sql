@@ -41,17 +41,45 @@ CREATE VIEW UnreadMandatory AS
 
     SELECT bi.idnr AS student, course
     FROM MandatoryBranch mb
-    INNER JOIN BasicInformation bi on mb.program = bi.program and mb.branch = bi.branch
+    INNER JOIN BasicInformation bi ON mb.program = bi.program AND mb.branch = bi.branch
     WHERE bi.idnr NOT IN (SELECT pc.student FROM PassedCourses pc);
 
 
-/*CREATE VIEW points AS*/
+CREATE VIEW PassedClassifiedCourses AS
+
+    SELECT
+        pc.student,
+        pc.course,
+        pc.credits,
+        c.classification
+
+    FROM PassedCourses pc
+    LEFT JOIN classified c ON pc.course = c.course
+    WHERE classification = 'math';
+
+/*Make separate VIEWs for maths, research, etc.? */
+/*Check if they mean finished and not passed?*/
+
+
+
+/*DROP VIEW PassedClassifiedCourses; */
+/*DROP VIEW PathToGraduation; */
+/*SELECT * FROM  ;*/
 
 
 
 CREATE VIEW PathToGraduation AS
 
-    SELECT bi.idnr AS student, GREATEST(0,SUM(pc.credits)) AS totalPoints /*, mandatoryLeft, mathCredits, researchCredits, qualified */
+    SELECT
+        bi.idnr AS student,
+        GREATEST(0,SUM(pc.credits)) AS totalPoints,
+        GREATEST(0, COUNT(um.course)) AS mandatoryLeft,   /*Why count(um.course)?*/
+        GREATEST(0, SUM(pcc.credits)) AS mathCredits
+     /*, researchCredits, qualified */
     FROM BasicInformation bi
     LEFT JOIN PassedCourses pc ON bi.idnr = pc.student
-    GROUP BY bi.idnr;
+    LEFT JOIN UnreadMandatory um ON bi.idnr = um.student
+    INNER JOIN PassedClassifiedCourses pcc ON pc.course = pcc.course AND pcc.classification = 'math'
+    GROUP BY bi.idnr
+    ORDER BY bi.idnr;
+
