@@ -1,3 +1,4 @@
+
 CREATE VIEW BasicInformation AS
 
 SELECT s.idnr, s.name, s.login, s.program, sb.branch
@@ -57,7 +58,6 @@ CREATE VIEW PassedMathCredits AS
     GROUP BY pc.student;
 
 
-
 CREATE VIEW PassedResearchCredits AS
 
     SELECT pc.student, SUM(pc.credits) AS credits
@@ -78,19 +78,9 @@ CREATE VIEW PassedSeminarCourses AS
     GROUP BY pc.student;
 
 
-CREATE VIEW PassedSeminarCourses AS
-
-    SELECT pc.student, COUNT(pc.credits) AS course
-
-    FROM PassedCourses pc
-    LEFT JOIN classified c ON pc.course = c.course
-    WHERE classification = 'seminar'
-    GROUP BY pc.student;
-
-
 CREATE VIEW RecommendedCourses AS
 
-    SELECT bi.idnr, rb.course, c.credits as credits
+    SELECT bi.idnr, rb.course, c.credits AS credits
     FROM BasicInformation bi
 
     INNER JOIN RecommendedBranch rb ON (bi.program, bi.branch) = (rb.program, rb.branch)
@@ -113,7 +103,7 @@ CREATE VIEW PassedRecommendedCredits AS
 
 CREATE VIEW Qualified AS
 
-    SELECT bi.idnr, TRUE AS qualified
+    SELECT bi.idnr
     FROM BasicInformation bi
     WHERE
         bi.idnr NOT IN (SELECT um.student FROM UnreadMandatory um)
@@ -132,7 +122,7 @@ CREATE VIEW PathToGraduation AS
         GREATEST(0, pmc.credits) AS mathCredits,
         GREATEST(0, prc.credits) AS researchCredits,
         GREATEST(0, psc.course) AS seminarCourses,
-        case
+        CASE
             WHEN bi.idnr IN (SELECT qualified.idnr FROM qualified) THEN 't'
             ELSE 'f'
             END AS qualified
@@ -145,8 +135,5 @@ CREATE VIEW PathToGraduation AS
         LEFT JOIN PassedSeminarCourses psc ON pc.student = psc.student
         LEFT JOIN Qualified q ON bi.idnr = q.idnr
 
-    GROUP BY bi.idnr, pmc.credits, prc.credits, PSC.course, q.qualified
+    GROUP BY bi.idnr, pmc.credits, prc.credits, PSC.course, q.idnr
     ORDER BY bi.idnr;
-
-
-
