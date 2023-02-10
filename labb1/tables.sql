@@ -1,3 +1,4 @@
+/*
 -- This script deletes everything in your database
 \set QUIET true
 SET client_min_messages TO WARNING; -- Less talk please.
@@ -10,7 +11,7 @@ GRANT ALL ON SCHEMA public TO CURRENT_USER;
 \set ON_ERROR_STOP ON
 SET client_min_messages TO NOTICE; -- More talk
 \set QUIET false
-
+*/
 
 
 CREATE TABLE Students (
