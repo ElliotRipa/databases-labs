@@ -52,7 +52,7 @@ CREATE TABLE LimitedCourses(
 
 CREATE TABLE StudentBranches (
     student CHAR(10) PRIMARY KEY NOT NULL,
-    branch  TEXT,
+    branch  TEXT NOT NULL,
     program TEXT NOT NULL,
 
     FOREIGN KEY(student) REFERENCES Students(idnr),
@@ -132,7 +132,7 @@ CREATE TABLE Registered(
 CREATE TABLE Taken(
     student CHAR(10) NOT NULL,
     course CHAR(6) NOT NULL,
-    grade CHAR(1) CHECK(grade IN ('U', '3', '4', '5')),
+    grade CHAR(1) NOT NULL CHECK(grade IN ('U', '3', '4', '5')),
 
     PRIMARY KEY(student, course),
 
