@@ -121,7 +121,10 @@ CREATE TABLE Registered(
     student TEXT NOT NULL,
     course  CHAR(6) NOT NULL,
 
-    PRIMARY KEY(student, course)
+    PRIMARY KEY(student, course),
+
+    FOREIGN KEY(student) REFERENCES Students(idnr),
+    FOREIGN KEY(course) REFERENCES Courses(code)
 
 );
 
