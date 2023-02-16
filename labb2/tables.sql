@@ -122,23 +122,3 @@ CREATE TABLE Grades(
     FOREIGN KEY(course) REFERENCES Courses(code)
 
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
