@@ -38,14 +38,14 @@ CREATE VIEW UnreadMandatory AS
     SELECT bi.idnr AS student, course
     FROM MandatoryProgram mp
     INNER JOIN BasicInformation bi ON mp.program = bi.program
-    WHERE bi.idnr NOT IN (SELECT pc.student FROM PassedCourses pc)
+    WHERE (bi.idnr, course) NOT IN (SELECT pc.student, pc.course FROM PassedCourses pc)
 
     UNION
 
     SELECT bi.idnr AS student, course
     FROM MandatoryBranch mb
     INNER JOIN BasicInformation bi ON mb.program = bi.program AND mb.branch = bi.branch
-    WHERE bi.idnr NOT IN (SELECT pc.student FROM PassedCourses pc);
+    WHERE (bi.idnr, course) NOT IN (SELECT pc.student, pc.course FROM PassedCourses pc);
 
 
 CREATE VIEW PassedMathCredits AS
@@ -123,8 +123,8 @@ CREATE VIEW PathToGraduation AS
         GREATEST(0, prc.credits) AS researchCredits,
         GREATEST(0, psc.course) AS seminarCourses,
         CASE
-            WHEN bi.idnr IN (SELECT qualified.idnr FROM qualified) THEN 't'
-            ELSE 'f'
+            WHEN bi.idnr IN (SELECT qualified.idnr FROM qualified) THEN true
+            ELSE false
             END AS qualified
 
     FROM BasicInformation bi
