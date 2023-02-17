@@ -66,3 +66,5 @@ INSERT INTO Grades VALUES('2222222222','CCC444','U');
 INSERT INTO WaitingList VALUES('3333333333','CCC222',1);
 INSERT INTO WaitingList VALUES('3333333333','CCC333',1);
 INSERT INTO WaitingList VALUES('2222222222','CCC333',2);
+
+--We changed some names, and divided up some INSERTs into multiple ones.
