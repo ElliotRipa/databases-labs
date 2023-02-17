@@ -117,11 +117,11 @@ CREATE VIEW PathToGraduation AS
 
     SELECT
         bi.idnr AS student,
-        GREATEST(0,SUM(pc.credits)) AS totalCredits,
-        GREATEST(0, COUNT(um.course)) AS mandatoryLeft,
-        GREATEST(0, pmc.credits) AS mathCredits,
-        GREATEST(0, prc.credits) AS researchCredits,
-        GREATEST(0, psc.course) AS seminarCourses,
+        COALESCE(SUM(pc.credits), 0) AS totalCredits,
+        COALESCE(COUNT(um.course), 0) AS mandatoryLeft,
+        COALESCE(pmc.credits, 0) AS mathCredits,
+        COALESCE(prc.credits, 0) AS researchCredits,
+        COALESCE(psc.course, 0) AS seminarCourses,
         CASE
             WHEN bi.idnr IN (SELECT qualified.idnr FROM qualified) THEN true
             ELSE false
