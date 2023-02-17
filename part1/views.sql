@@ -113,6 +113,30 @@ CREATE VIEW Qualified AS
         AND (SELECT prc.credits FROM PassedRecommendedCredits prc WHERE bi.idnr = prc.student) >= 10;
 
 
+CREATE VIEW totalCredits AS
+    SELECT
+    bi.idnr AS student,
+    SUM(pc.credits) AS totalCredits
+
+    FROM BasicInformation bi
+
+    LEFT JOIN PassedCourses pc ON bi.idnr = pc.student
+
+    GROUP BY bi.idnr;
+
+
+CREATE VIEW mandatoryLeft AS
+    SELECT
+        bi.idnr AS student,
+        COUNT(um.course) AS mandatoryLeft
+
+        FROM BasicInformation bi
+
+        LEFT JOIN UnreadMandatory um ON bi.idnr = um.student
+
+        GROUP BY bi.idnr;
+
+
 CREATE VIEW PathToGraduation AS
 
     SELECT
@@ -122,12 +146,10 @@ CREATE VIEW PathToGraduation AS
         COALESCE(pmc.credits, 0) AS mathCredits,
         COALESCE(prc.credits, 0) AS researchCredits,
         COALESCE(psc.course, 0) AS seminarCourses,
-        CASE
-            WHEN bi.idnr IN (SELECT qualified.idnr FROM qualified) THEN true
-            ELSE false
-            END AS qualified
+        bi.idnr IN (SELECT qualified.idnr FROM qualified) as qualified
 
     FROM BasicInformation bi
+
         LEFT JOIN PassedCourses pc ON bi.idnr = pc.student
         LEFT JOIN UnreadMandatory um ON bi.idnr = um.student
         LEFT JOIN PassedMathCredits pmc ON pc.student = pmc.student
@@ -137,3 +159,33 @@ CREATE VIEW PathToGraduation AS
 
     GROUP BY bi.idnr, pmc.credits, prc.credits, PSC.course, q.idnr
     ORDER BY bi.idnr;
+
+
+
+
+
+/* OLD
+ CREATE VIEW PathToGraduation AS
+
+    SELECT
+        bi.idnr AS student,
+        COALESCE(SUM(pc.credits), 0) AS totalCredits,
+        COALESCE(COUNT(um.course), 0) AS mandatoryLeft,
+        COALESCE(pmc.credits, 0) AS mathCredits,
+        COALESCE(prc.credits, 0) AS researchCredits,
+        COALESCE(psc.course, 0) AS seminarCourses,
+        bi.idnr IN (SELECT qualified.idnr FROM qualified) as qualified
+
+    FROM BasicInformation bi
+
+        LEFT JOIN PassedCourses pc ON bi.idnr = pc.student
+        LEFT JOIN UnreadMandatory um ON bi.idnr = um.student
+        LEFT JOIN PassedMathCredits pmc ON pc.student = pmc.student
+        LEFT JOIN PassedResearchCredits prc ON pc.student = prc.student
+        LEFT JOIN PassedSeminarCourses psc ON pc.student = psc.student
+        LEFT JOIN Qualified q ON bi.idnr = q.idnr
+
+    GROUP BY bi.idnr, pmc.credits, prc.credits, PSC.course, q.idnr
+    ORDER BY bi.idnr;
+
+ */
