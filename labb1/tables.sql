@@ -1,16 +1,3 @@
--- This script deletes everything in your database
-\set QUIET true
-SET client_min_messages TO WARNING; -- Less talk please.
--- This script deletes everything in your database
-DROP SCHEMA public CASCADE;
-CREATE SCHEMA public;
-GRANT ALL ON SCHEMA public TO CURRENT_USER;
--- This line makes psql stop on the first error it encounters
--- You may want to remove this when running tests that are intended to fail
-\set ON_ERROR_STOP ON
-SET client_min_messages TO NOTICE; -- More talk
-\set QUIET false
-
 
 
 CREATE TABLE Students (
@@ -51,7 +38,7 @@ CREATE TABLE LimitedCourses(
 
 CREATE TABLE StudentBranches (
     student CHAR(10) PRIMARY KEY NOT NULL,
-    branch  TEXT,
+    branch  TEXT NOT NULL,
     program TEXT NOT NULL,
 
     FOREIGN KEY(student) REFERENCES Students(idnr),
@@ -120,7 +107,10 @@ CREATE TABLE Registered(
     student TEXT NOT NULL,
     course  CHAR(6) NOT NULL,
 
-    PRIMARY KEY(student, course)
+    PRIMARY KEY(student, course),
+
+    FOREIGN KEY(student) REFERENCES Students(idnr),
+    FOREIGN KEY(course) REFERENCES Courses(code)
 
 );
 
@@ -128,7 +118,7 @@ CREATE TABLE Registered(
 CREATE TABLE Taken(
     student CHAR(10) NOT NULL,
     course CHAR(6) NOT NULL,
-    grade CHAR(1) CHECK(grade IN ('U', '3', '4', '5')),
+    grade CHAR(1) NOT NULL CHECK(grade IN ('U', '3', '4', '5')),
 
     PRIMARY KEY(student, course),
 
@@ -149,12 +139,3 @@ CREATE TABLE WaitingList(
     FOREIGN KEY (course) REFERENCES LimitedCourses(code)
 
 );
-
-
-SELECT * FROM Students;
-
-
-
-
-
-
