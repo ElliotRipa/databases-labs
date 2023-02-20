@@ -141,8 +141,8 @@ CREATE VIEW PathToGraduation AS
 
     SELECT
         bi.idnr AS student,
-        COALESCE(SUM(pc.credits), 0) AS totalCredits,
-        COALESCE(COUNT(um.course), 0) AS mandatoryLeft,
+        COALESCE(tc.TotalCredits, 0) AS totalCredits,
+        COALESCE(ml.MandatoryLeft, 0) AS mandatoryLeft,
         COALESCE(pmc.credits, 0) AS mathCredits,
         COALESCE(prc.credits, 0) AS researchCredits,
         COALESCE(psc.course, 0) AS seminarCourses,
@@ -150,14 +150,13 @@ CREATE VIEW PathToGraduation AS
 
     FROM BasicInformation bi
 
-        LEFT JOIN PassedCourses pc ON bi.idnr = pc.student
-        LEFT JOIN UnreadMandatory um ON bi.idnr = um.student
-        LEFT JOIN PassedMathCredits pmc ON pc.student = pmc.student
-        LEFT JOIN PassedResearchCredits prc ON pc.student = prc.student
-        LEFT JOIN PassedSeminarCourses psc ON pc.student = psc.student
+        LEFT JOIN TotalCredits tc ON bi.idnr = tc.student
+        LEFT JOIN MandatoryLeft ml ON bi.idnr = ml.student
+        LEFT JOIN PassedMathCredits pmc ON bi.idnr = pmc.student
+        LEFT JOIN PassedResearchCredits prc ON bi.idnr = prc.student
+        LEFT JOIN PassedSeminarCourses psc ON bi.idnr = psc.student
         LEFT JOIN Qualified q ON bi.idnr = q.idnr
 
-    GROUP BY bi.idnr, pmc.credits, prc.credits, PSC.course, q.idnr
     ORDER BY bi.idnr;
 
 
