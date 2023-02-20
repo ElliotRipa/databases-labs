@@ -1,19 +1,19 @@
 
 CREATE VIEW BasicInformation AS
 
-SELECT s.idnr, s.name, s.login, s.program, sb.branch
+SELECT s.idnr, s.name, s.login, s.program, pob.branch
 
     FROM Students s
-    LEFT JOIN StudentBranches sb ON s.idnr = sb.student
+    LEFT JOIN PartOfBranch pob ON s.idnr = pob.student
         ORDER BY s.idnr;
 
 
 CREATE VIEW FinishedCourses AS
 
-    SELECT t.student, t.course, t.grade, c.credits
-    FROM Taken t
-    LEFT JOIN Courses c ON c.code = t.course
-        ORDER BY t.student;
+    SELECT g.student, g.course, g.grade, c.credits
+    FROM Grades g
+    LEFT JOIN Courses c ON c.code = g.course
+        ORDER BY g.student;
 
 
 CREATE VIEW PassedCourses AS
@@ -35,16 +35,16 @@ CREATE VIEW Registrations AS
 
 CREATE VIEW UnreadMandatory AS
 
-    SELECT bi.idnr AS student, course
-    FROM MandatoryProgram mp
-    INNER JOIN BasicInformation bi ON mp.program = bi.program
+    SELECT bi.idnr AS student, mpc.course
+    FROM MandatoryProgramCourses mpc
+    INNER JOIN BasicInformation bi ON mpc.program = bi.program
     WHERE (bi.idnr, course) NOT IN (SELECT pc.student, pc.course FROM PassedCourses pc)
 
     UNION
 
     SELECT bi.idnr AS student, course
-    FROM MandatoryBranch mb
-    INNER JOIN BasicInformation bi ON mb.program = bi.program AND mb.branch = bi.branch
+    FROM MandatoryBranchCourses mbc
+    INNER JOIN BasicInformation bi ON mbc.program = bi.program AND mbc.branch = bi.branch
     WHERE (bi.idnr, course) NOT IN (SELECT pc.student, pc.course FROM PassedCourses pc);
 
 
@@ -80,11 +80,11 @@ CREATE VIEW PassedSeminarCourses AS
 
 CREATE VIEW RecommendedCourses AS
 
-    SELECT bi.idnr, rb.course, c.credits AS credits
+    SELECT bi.idnr, rbc.course, c.credits AS credits
     FROM BasicInformation bi
 
-    INNER JOIN RecommendedBranch rb ON (bi.program, bi.branch) = (rb.program, rb.branch)
-    LEFT JOIN Courses c ON c.code = rb.course;
+    INNER JOIN RecommendedBranchCourses rbc ON (bi.program, bi.branch) = (rbc.program, rbc.branch)
+    LEFT JOIN Courses c ON c.code = rbc.course;
 
 
 
@@ -117,11 +117,11 @@ CREATE VIEW PathToGraduation AS
 
     SELECT
         bi.idnr AS student,
-        GREATEST(0,SUM(pc.credits)) AS totalCredits,
-        GREATEST(0, COUNT(um.course)) AS mandatoryLeft,
-        GREATEST(0, pmc.credits) AS mathCredits,
-        GREATEST(0, prc.credits) AS researchCredits,
-        GREATEST(0, psc.course) AS seminarCourses,
+        COALESCE(SUM(pc.credits), 0) AS totalCredits,
+        COALESCE(COUNT(um.course), 0) AS mandatoryLeft,
+        COALESCE(pmc.credits, 0) AS mathCredits,
+        COALESCE(prc.credits, 0) AS researchCredits,
+        COALESCE(psc.course, 0) AS seminarCourses,
         CASE
             WHEN bi.idnr IN (SELECT qualified.idnr FROM qualified) THEN true
             ELSE false
