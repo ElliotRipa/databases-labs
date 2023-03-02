@@ -1,5 +1,23 @@
+CREATE TABLE Departments(
+    name            TEXT PRIMARY KEY NOT NULL,
+    abbreviation    TEXT UNIQUE NOT NULL
+);
+
+
 CREATE TABLE Programs(
-    name TEXT PRIMARY KEY NOT NULL
+    name TEXT PRIMARY KEY NOT NULL,
+    abbreviation TEXT NOT NULL
+
+);
+
+CREATE TABLE HostedBy(
+    program TEXT NOT NULL,
+    department TEXT NOT NULL,
+
+    PRIMARY KEY(program, department),
+
+    FOREIGN KEY(program) REFERENCES Programs(name),
+    FOREIGN KEY(department) REFERENCES Departments(name)
 
 );
 
@@ -30,8 +48,21 @@ CREATE TABLE Courses(
     code CHAR(6) PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
     credits FLOAT NOT NULL,
-    department TEXT NOT NULL
+    department TEXT NOT NULL,
 
+    FOREIGN KEY(department) REFERENCES Departments(name)
+);
+
+
+CREATE TABLE PrerequisiteFor(
+
+    course CHAR(6) NOT NULL,
+    prerequisite CHAR(6) NOT NULL,
+
+    FOREIGN KEY(course) REFERENCES courses(code),
+    FOREIGN KEY(prerequisite) REFERENCES Courses(code),
+
+    PRIMARY KEY(course, prerequisite)
 );
 
 

@@ -1,5 +1,12 @@
-INSERT INTO Programs VALUES ('Prog1');
-INSERT INTO Programs VALUES ('Prog2');
+INSERT INTO Programs VALUES ('Prog1', 'P1');
+INSERT INTO Programs VALUES ('Prog2', 'P2');
+
+INSERT INTO departments VALUES ('Dep1', 'D1');
+INSERT INTO departments VALUES ('Dep2', 'D2');
+
+INSERT INTO HostedBy VALUES ('Prog1', 'Dep1');
+INSERT INTO HostedBy VALUES ('Prog1', 'Dep2');
+INSERT INTO HostedBy VALUES ('Prog2', 'Dep2');
 
 INSERT INTO Branches VALUES ('B1','Prog1');
 INSERT INTO Branches VALUES ('B2','Prog1');
@@ -42,6 +49,10 @@ INSERT INTO MandatoryBranchCourses VALUES ('CCC444', 'B1', 'Prog2');
 
 INSERT INTO RecommendedBranchCourses VALUES ('CCC222', 'B1', 'Prog1');
 INSERT INTO RecommendedBranchCourses VALUES ('CCC333', 'B1', 'Prog2');
+
+INSERT INTO PrerequisiteFor VALUES ('CCC333', 'CCC444');
+INSERT INTO PrerequisiteFor VALUES ('CCC222', 'CCC444');
+INSERT INTO PrerequisiteFor VALUES ('CCC111', 'CCC444');
 
 INSERT INTO Registered VALUES ('1111111111','CCC111');
 INSERT INTO Registered VALUES ('1111111111','CCC222');
