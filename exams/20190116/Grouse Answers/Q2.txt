@@ -1,14 +1,19 @@
-Courses(_code_, name)
+a.)
 
-Teachers(_ssn_, name)
+(a, c, e)
+(b, c, e)
+(c, d, e)
 
-Instances(_course_, _semester_, capacity)
-(course) --> Courses.code
 
-Teaches(_teacher_, _course_, _semester_)
-(course, semester) --> Instances(course, semester)
-(teacher) --> Teachers(ssn)
+b.)
 
-Examiner(teacher, _course_, _semester_)
-(course, semester) --> Instances(course, semester)
-(teacher, course, semester) --> Teaches(teacher, course, semester)
+{b, c, d}
+{a, b, c, d}
+{a, b, d, e}
+
+
+c.)
+
+a	b	c	d	e
+1	1	1	1	1
+1	1	1	2	2
