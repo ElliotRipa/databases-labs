@@ -10,19 +10,19 @@ CREATE TABLE Assignment (
 
 CREATE TABLE Registered(
 
-	TEXT	student,
-	CHAR(6)	course
+	student	TEXT,
+	course	TEXT
 
 	PRIMARY KEY(student, course)
 );
 
 CREATE TABLE Submission (
 
-	INT	idnr PRIMARY KEY AUTO_INCREMENT,					//a.)
-	TEXT	student,
-	CHAR(6)	course,
-	TEXT	Assignment,
-	TIME	stime UNIQUE
+	idnr		INT PRIMARY KEY,
+	student		TEXT,
+	course		TEXT,
+	assignment	TEXT,
+	stime		TIMESTAMP
 
 	UNIQUE(student, stime)								// f.)
 
@@ -32,27 +32,22 @@ CREATE TABLE Submission (
 
 CREATE TABLE SubmittedFile (
 
-	INT 	submission,
-	TEXT	filename,
-	TEXT	contents
+	submission	INT,
+	filename	TEXT,
+	contents	TEXT
 
 	PRIMARY KEY(submission, filename)
+
+	FOREIGN KEY(submission) REFERENCES Submission(idnr) ON DELETE CASCADE		// d.)
+
 );
 
 
-CREATE VIEW SubmittedFileButCooler (							// c.)
+CREATE VIEW SubmittedFileButCooler							// c.)
 
 	SELECT *, length(contents) AS filesize
-	FROM SubmittedFile
-);
+	FROM SubmittedFile;
 
-CREATE TRIGGER DeleteFilesToo								// d.)
-
-	BEFORE DELETE ON Submission
-	BEGIN
-		DELETE FROM SubmittedFile
-		WHERE submission = (SELECT idnr FROM deleted)
-	END
 
 CREATE TRIGGER DeleteSubmissionToo							// e.)
 
@@ -62,16 +57,4 @@ CREATE TRIGGER DeleteSubmissionToo							// e.)
 		DELETE FROM Submission
 		WHERE idnr = (SELECT submission FROM deleted)
 	END
-
-
-
-
-
-
-
-
-
-
-
-
 
