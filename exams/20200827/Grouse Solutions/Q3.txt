@@ -1,0 +1,12 @@
+a.)
+
+SELECT s.student, SUM(sf.filesize)
+FROM Submission s
+LEFT JOIN SubmittedFile sf ON s.idnr = sf.submission
+GROUP BY s.student;
+
+
+b.)
+
+SELECT sf.id
+LEFT JOIN
