@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-2020-06.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Thomas Hallgren">
+  <title>Databases (TDA357/DIT621)</title>
+  <link rel="stylesheet" href="./exam_2020-06-08_files/exam.css">
+</head>
+<body>
+<main>
+<h1 id="databases-tda357dit621">Databases (TDA357/DIT621)</h1>
+<h2 id="remote-exam-on-8-june-2020-at-1400-1800">Remote Exam on 8 June 2020 at 14:00-18:00</h2>
+<ul>
+<li><p>Department of Computer Science and Engineering, Chalmers University of Technology &amp; University of Gothenburg.</p></li>
+<li><p>Examiner: Thomas Hallgren, will be answering questions via email, <a href="https://chalmers.instructure.com/conversations">Inbox in Canvas</a>, or Zoom.</p></li>
+<li><p>Results: Will be published within three weeks from the exam date.</p></li>
+<li><p>Maximum number of points: 60.</p></li>
+<li><p>Grade limits for Chalmers: 24p for 3, 36p for 4, 48p for 5.</p></li>
+<li><p>Grade limits for GU: 24p for G, 42p for VG.</p></li>
+<li><p>Help material: this is a remote exam, you can use any help material.</p></li>
+</ul>
+<h3 id="instructions">Instructions</h3>
+<ul>
+<li><p>You can answer in English or Swedish.</p></li>
+<li><p>Indicate clearly if you make any assumptions that are not given in the question. In particular: in SQL questions, use standard SQL or PostgreSQL. If you use any other variant (such as Oracle or MySQL), say this; but full points are not guaranteed since this may change the nature of the question.</p>
+<h3 id="submitting-answers">Submitting answers</h3>
+<ul>
+<li><p>The exam is made available as an assignment in Canvas and you should submit your answers in Canvas. Write your answers in files that you upload.</p></li>
+<li><p>If you write the answers on your computer: submit them in <code>.txt</code>, <code>.sql</code>, <code>.pdf</code>, <code>png</code> or <code>.docx</code> files.</p></li>
+<li><p>If you use pen and paper: scan your answers or take photos of them and submit them as <code>.pdf</code> or <code>.jpg</code> files. Take photos in good light, and if possible, use an app that has a <em>document scanning mode</em> (e.g.&nbsp;the Notes app in iOS) to straighten the photos and adjust the brightness.</p></li>
+<li><p>Clearly mark the answer to each question so that they are easy to find.</p></li>
+<li><p>You can write all answers in one file, or put the answer to each question in a separate file. If you submit many files, include the question number in the file name, e.g.&nbsp;Q1.pdf, Q2.txt, Q3.txt, etc.</p></li>
+<li><p>You can submit multiple times, but only the last submission will be graded.</p></li>
+</ul></li>
+</ul>
+<h2 id="entity-relationship-modelling-10p">1 Entity-Relationship Modelling (10p)</h2>
+<h3 id="e-r-diagram-6p">1.1 E-R diagram (6p)</h3>
+<p>Draw an E-R diagram that describes the high-level design of the database a business might use to keep track of its products, customers and the orders customers place. The domain description is as follows:</p>
+<ul>
+<li><p>A customer has a name, an address and an email. Each customer is also assigned a unique customer number.</p></li>
+<li><p>Some customers are loyal customers. Loyal customers get a discount on everything they order. (The discount is usually between 10% and 40%. There might be other benefits in the future.)</p></li>
+<li><p>A product has a description and a unit price. Each product is also assigned a unique product number.</p></li>
+<li><p>An order is made by a certain customer on a certain date. Each order is also assigned a unique order number.</p></li>
+<li><p>An order also contains a number of order lines. Each order line identifies a product and specifies the quantity that has been ordered of that product. The expectation is that different order lines refer to different products.</p></li>
+<li><p>(The value of an order can be computed by summing up the unit price multiplied by the ordered quantity for each product in the order, then applying the discount, if the customer is a loyal customer.)</p></li>
+</ul>
+<p><strong>Note</strong>: domain descriptions often are a bit vague. If you need to make any assumptions, write them down in your answer. Also, some of the information included in the domain description may only be useful at a later stage in the database design process.</p>
+<h3 id="from-e-r-model-to-database-schema-4p">1.2 From E-R model to database schema (4p)</h3>
+<p>Translate this E-R diagram into a relational schema, including keys and constraints.</p>
+<p><img style="max-width: 28em" src="./exam_2020-06-08_files/Diagram2.svg"></p>
+<h2 id="relational-modelling-and-functional-dependencies-8p">2 Relational Modelling and Functional Dependencies (8p)</h2>
+<p>Consider the following table of benchmark results:</p>
+<table>
+<thead>
+<tr class="header">
+<th>date</th>
+<th>hostname</th>
+<th>hardware</th>
+<th>os</th>
+<th>benchmark</th>
+<th style="text-align: right;">result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2019-03-15</td>
+<td>ed-3507-03</td>
+<td>Dell Precision Tower 3620</td>
+<td>RedHat 7.5</td>
+<td>Gb4 Single</td>
+<td style="text-align: right;">5597</td>
+</tr>
+<tr class="even">
+<td>2019-03-15</td>
+<td>ed-3507-03</td>
+<td>Dell Precision Tower 3620</td>
+<td>RedHat 7.5</td>
+<td>Gb4 Multi</td>
+<td style="text-align: right;">16559</td>
+</tr>
+<tr class="odd">
+<td>2018-08-20</td>
+<td>mbp2</td>
+<td>MacBook Pro 15" (Late 2013)</td>
+<td>macOS 10.13.6</td>
+<td>Gb4 Single</td>
+<td style="text-align: right;">3787</td>
+</tr>
+<tr class="even">
+<td>2018-08-20</td>
+<td>mbp2</td>
+<td>MacBook Pro 15" (Late 2013)</td>
+<td>macOS 10.13.6</td>
+<td>Gb4 Multi</td>
+<td style="text-align: right;">13104</td>
+</tr>
+<tr class="odd">
+<td>2017-04-04</td>
+<td>mbp2</td>
+<td>MacBook Pro 15" (Late 2013)</td>
+<td>Debian 8.7</td>
+<td>Gb4 Single</td>
+<td style="text-align: right;">3841</td>
+</tr>
+<tr class="even">
+<td>2017-04-04</td>
+<td>mbp2</td>
+<td>MacBook Pro 15" (Late 2013)</td>
+<td>Debian 8.7</td>
+<td>Gb4 Multi</td>
+<td style="text-align: right;">11589</td>
+</tr>
+<tr class="odd">
+<td>2017-04-04</td>
+<td>mini1</td>
+<td>Mac mini (Late 2014)</td>
+<td>macOS 10.12.4</td>
+<td>Gb4 Single</td>
+<td style="text-align: right;">3739</td>
+</tr>
+<tr class="even">
+<td>2017-04-04</td>
+<td>mini1</td>
+<td>Mac mini (Late 2014)</td>
+<td>macOS 10.12.4</td>
+<td>Gb4 Multi</td>
+<td style="text-align: right;">7192</td>
+</tr>
+<tr class="odd">
+<td>2016-11-06</td>
+<td>iphone7</td>
+<td>iPhone 7 Plus (32GB)</td>
+<td>iOS 10.2</td>
+<td>Gb4 Single</td>
+<td style="text-align: right;">3470</td>
+</tr>
+<tr class="even">
+<td>2016-11-06</td>
+<td>iphone7</td>
+<td>iPhone 7 Plus (32GB)</td>
+<td>iOS 10.2</td>
+<td>Gb4 Multi</td>
+<td style="text-align: right;">5629</td>
+</tr>
+</tbody>
+</table>
+<p>There is some redundant information in the above table, as evidenced by the repeated values in some of the columns, which suggests that it might be desirable to split up the information into smaller tables.</p>
+<h3 id="functional-dependencies-3p">2.1 Functional Dependencies (3p)</h3>
+<p>What are the functional dependencies? What are the candidate keys?</p>
+<p>Consider that</p>
+<ul>
+<li>The <code>date</code> indicates when a benchmark result was obtained, but the result would presumably be the same if the benchmark was run on another day. It is included for documentation, and to allow the results to be sorted by date.</li>
+<li>The <code>hostname</code> attribute uniquely identifies a host (a computing device).</li>
+<li>The <code>hardware</code> attribute is an incomplete specification of the hardware. For example, there are different variants of the Mac mini (Late 2014), so it is possible that at some point a <code>mini2</code> with different benchmark results is added to the table, even though <code>mini2</code> is also a Mac mini (Late&nbsp;2014).</li>
+<li>The <code>os</code> and <code>benchmark</code> attributes uniquely identify an operating system and a benchmark, respectively.</li>
+</ul>
+<h3 id="multi-valued-dependencies-2p">2.2 Multi-valued dependencies (2p)</h3>
+<p>Are there any multivalued dependencies? If so, give an example.</p>
+<h3 id="decomposition-3p">2.3 Decomposition (3p)</h3>
+<p>Give a practical decomposition of the table above. It should reduce the redundancies and make it easier to add new hosts and benchmark results, and it should be possible to reconstruct the original big table from the smaller tables.</p>
+<p>You should show the relational schemas for the new tables (including the keys), but you do not need to show the contents of the new tables.</p>
+<h2 id="sql-queries-12p">3 SQL queries (12p)</h2>
+<p>Below is the schema for an hypothetical database with information on software developers and the software projects they contribute to.</p>
+<div class="line-block">Developers(<u>alias</u>, realname, country)<br>
+<br>
+Projects(<u>name</u>, owner)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;owner -&gt; Developers(alias)<br>
+<br>
+Contributions(<u>developer</u>, <u>date</u>, project, language)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;developer -&gt; Developers(alias)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;project -&gt; Projects(name)</div>
+<ul>
+<li>Each developer has a unique alias, a real name and comes from a country.</li>
+<li>Each project has a unique name and is owned by a developer.</li>
+<li>A contribution to a project is made by a developer on a certain date. A contribution consists of source code written in a particular programming language.</li>
+</ul>
+<h3 id="p">3.1 (2p)</h3>
+<p>Write an SQL query that lists the real names of all developers from Sweden.</p>
+<h3 id="p-1">3.2 (3p)</h3>
+<p>Write a query that for each project lists its name, owner alias owner real name and country.</p>
+<p>The result might look like this:</p>
+<table>
+<thead>
+<tr class="header">
+<th>name</th>
+<th>owner</th>
+<th>realname</th>
+<th>country</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Emacs</td>
+<td>rms</td>
+<td>Richard Stallman</td>
+<td>USA</td>
+</tr>
+<tr class="even">
+<td>Linux</td>
+<td>torvalds</td>
+<td>Linus Torvalds</td>
+<td>Finland</td>
+</tr>
+<tr class="odd">
+<td>Fudgets</td>
+<td>hallgren</td>
+<td>Thomas Hallgren</td>
+<td>Sweden</td>
+</tr>
+<tr class="even">
+<td>WebFudgets</td>
+<td>hallgren</td>
+<td>Thomas Hallgren</td>
+<td>Sweden</td>
+</tr>
+<tr class="odd">
+<td>GF</td>
+<td>ranta</td>
+<td>Aarne Ranta</td>
+<td>Finland</td>
+</tr>
+</tbody>
+</table>
+<p><em>Disclaimer</em>: any similarity with real people and real projects is purely coincidental.</p>
+<h3 id="p-2">3.3 (3p)</h3>
+<p>Write an SQL query that lists the most popular programming languages based how many developers have made contributions in each language. The output should be ordered with the most popular language first.</p>
+<p>The result might look like this:</p>
+<table>
+<thead>
+<tr class="header">
+<th>language</th>
+<th style="text-align: right;">popularity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Haskell</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td>C</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="odd">
+<td>Java</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="even">
+<td>Lisp</td>
+<td style="text-align: right;">7</td>
+</tr>
+</tbody>
+</table>
+<h3 id="p-3">3.4 (4p)</h3>
+<p>Let’s consider a project <em>international</em> if it has contributions by developers that come from other countries than the owner of the project. The more countries a project has contributions from, the more international it is.</p>
+<p>Write an SQL query that lists international projects. The output should contain the name of each international project and the number of other countries it has contributions from, ordered with the most international projects first.</p>
+<p>The result might look like this:</p>
+<table>
+<thead>
+<tr class="header">
+<th>name</th>
+<th style="text-align: right;">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Linux</td>
+<td style="text-align: right;">58</td>
+</tr>
+<tr class="even">
+<td>Emacs</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="odd">
+<td>GF</td>
+<td style="text-align: right;">23</td>
+</tr>
+<tr class="even">
+<td>Fudgets</td>
+<td style="text-align: right;">7</td>
+</tr>
+</tbody>
+</table>
+<h2 id="algebra-and-theory-8p">4 Algebra and theory (8p)</h2>
+<h3 id="p-4">4.1 (5p)</h3>
+<p>Consider again the database schema from question 3 and the following relational algebra query:</p>
+<div class="line-block">&nbsp;&nbsp;σ<sub>COUNT(developer)≥100</sub><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;γ<sub>project,COUNT(developer)</sub><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;δ (π<sub>project,developer</sub> Contributions)</div>
+<p>Explain what this query computes (2p) and write an SQL query that computes the same result (3p).</p>
+<h3 id="p-5">4.2 (3p)</h3>
+<p>In this question we consider a database that contains a relation <code>Countries(<u>name</u>,capital,…)</code>.</p>
+<p>SQL allows queries that contain subqueries in the WHERE clause, like in this example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-2020-06.html#cb1-1"></a><span class="kw">SELECT</span> name</span>
+<span id="cb1-2"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-2020-06.html#cb1-2"></a><span class="kw">FROM</span> Countries</span>
+<span id="cb1-3"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-2020-06.html#cb1-3"></a><span class="kw">WHERE</span> name <span class="kw">IN</span> (<span class="kw">SELECT</span> capital <span class="kw">FROM</span> Countries);</span></code></pre></div>
+<p>Queries like this have no direct translation to relational algebra and may not be supported by all SQL implementations. How would you rewrite it into an SQL query that computes the same result but does not contain any subqueries?</p>
+<h2 id="constraints-indexes-views-and-triggers-12p">5 Constraints, Indexes, Views and Triggers (12p)</h2>
+<p>Consider again the database schema from question 3.</p>
+<h3 id="primary-keys-and-references-3p">5.1 Primary keys and references (3p)</h3>
+<p>Write down the <code>CREATE TABLE</code> statements for the <code>Contributions</code> relation.</p>
+<ul>
+<li>All attributes should have type <code>TEXT</code> except the <code>date</code> attribute, which should have type <code>DATE</code>.</li>
+<li>Make sure you include the primary key and the referential constraints.</li>
+<li>The convention in relational schemas is that <code>NULL</code> values are not allowed unless explicitly stated (by adding <code>(or&nbsp;Null)</code> after the name of an attribute). Make sure this is reflected in your <code>CREATE TABLE</code> statement.</li>
+</ul>
+<h3 id="indexes-2p">5.2 Indexes (2p)</h3>
+<p>Over time, the number of developers and the number of contributions in the database may grow very large. We might still want to find all contributions by a particular developer quickly. Write an SQL statement that adds an index to the <code>Contributions</code> table to facilitate this.</p>
+<h3 id="views-3p">5.3 Views (3p)</h3>
+<p>Suppose an extra table is added to the database to keep track of which contributions are bug fixes, and how severe the bugs are.</p>
+<div class="line-block">BugFixes(<u>developer</u>,<u>date</u>,severity)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(developer,date) -&gt; Contributions.(developer,date)</div>
+<p>Write the <code>CREATE VIEW</code> statement for a view <code>ContributionsAndBugFixes</code> that provides a combined view of the <code>Contributions</code> and the <code>BugFixes</code> tables, i.e.&nbsp;the view has all the rows and columns from the <code>Contributions</code> table, plus the <code>severity</code> column from the BugFixes table. For contributions that are not bug fixes, the value in the <code>severity</code> column should be <code>NULL</code>.</p>
+<h3 id="triggers-4p">5.4 Triggers (4p)</h3>
+<p>Write a trigger that allows contributions and bug fixes to be inserted directly in the <code>ContributionsAndBugFixes</code> view introduced in the previous question. If the <code>severity</code> column in the new contribution is <code>NULL</code>, the contribution is not a bug fix and it should be inserted in the <code>Contributions</code> table only. If the <code>severity</code> columns is not <code>NULL</code> the contribution should be inserted in both the <code>Contributions</code> table and the <code>BugFixes</code> table.</p>
+<h2 id="semi-structured-data-10p">6 Semi-structured data (10p)</h2>
+<p>Consider again the database schema from question 3.</p>
+<h3 id="p-6">6.1 (5p)</h3>
+<p>Write an SQL query that creates one big JSON document containing information about all developers. Specifically, the document should be an array that for each developer contains an object with</p>
+<ul>
+<li>the alias,</li>
+<li>real name,</li>
+<li>country and</li>
+<li>an array with information about the projects that the developer has contributed to. For each project there should be an object containing
+<ul>
+<li>the name of the project and</li>
+<li>the number of contributions the developer has made to that project.</li>
+</ul></li>
+</ul>
+<p><em>Hint</em>: the functions <code>jsonb_agg</code> and <code>jsonb_build_object</code> will probably be useful.</p>
+<h3 id="p-7">6.2 (5p)</h3>
+<p>Write down the JSON Schema for the document you created in 6.1.</p>
+<p>The schema should contain enough details about the structure of the JSON document so that if you validate the document you created in 6.1 against the schema you will detect if there is a problem with it, e.g.&nbsp;if the document has the wrong structure, contains the wrong type of information or if some information is missing.</p>
+</main>
+
+
+</body></html>

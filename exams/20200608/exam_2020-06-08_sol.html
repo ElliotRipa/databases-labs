@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!-- saved from url=(0089)https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Thomas Hallgren">
+  <title>TDA357/DIT621 Databases Exam Suggested Solutions</title>
+  <link rel="stylesheet" href="./exam_2020-06-08_sol_files/exam.css">
+</head>
+<body>
+<main>
+<h1 id="databases-tda357dit621">Databases (TDA357/DIT621)</h1>
+<h2 id="remote-exam-on-8-june-2020-at-1400-1800">Remote Exam on 8 June 2020 at 14:00-18:00</h2>
+<h2 id="suggested-solutions">Suggested solutions</h2>
+<p>…</p>
+<h2 id="entity-relationship-modelling-10p">1 Entity-Relationship Modelling (10p)</h2>
+<h3 id="e-r-diagram-6p">1.1 E-R diagram (6p)</h3>
+<p><img src="./exam_2020-06-08_sol_files/ER2.svg" alt="E-R diagram">&nbsp;</p>
+<p>The diagram above was created with Query Converter, using the following design specification (which is not part of the answer).</p>
+<pre><code>ENTITY Product : _productNumber description unitPrice
+
+ENTITY Customer : _customerNumber name address email
+
+ISA LoyalCustomer Customer : discount
+
+ENTITY Order : _orderNumber date
+
+RELATIONSHIP OrderBy Order -) Customer
+
+RELATIONSHIP OrderLine Order -- Product : quantity</code></pre>
+<h3 id="from-e-r-model-to-database-schema-4p">1.2 From E-R model to database schema (4p)</h3>
+<div class="line-block">Components(<u>partNr</u>,type)<br>
+<br>
+Wires(<u>wireId</u>)<br>
+<br>
+Pins(<u>partNr</u>,<u>number</u>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;partNr → Component.partNr<br>
+<br>
+Connections(<u>partNr</u>,<u>number</u>,wireId)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(partNr,number) → Pin.(partNr,number)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;wireId → Wire.wireId</div>
+<h2 id="relational-modelling-and-functional-dependencies-8p">2 Relational Modelling and Functional Dependencies (8p)</h2>
+<h3 id="functional-dependencies-3p">2.1 Functional Dependencies (3p)</h3>
+<ul>
+<li>hostname → hardware</li>
+<li>hostname os benchmark → result</li>
+<li>hostname os benchmark → date</li>
+</ul>
+<p>Candiate key: hostname os benchmark</p>
+<h3 id="multivalued-dependencies-2p">2.2 Multivalued dependencies (2p)</h3>
+<p>Yes, for example {hostname,os}-&gt;&gt;{benchmark,result}.</p>
+<h3 id="decomposition-3p">2.3 Decomposition (3p)</h3>
+<div class="line-block">BenchmarkResults(<u>hostname</u>,<u>os</u>,<u>benchmark</u>,result,date)<br>
+&nbsp;&nbsp;&nbsp;hostname → Hosts.hostname<br>
+<br>
+Hosts(<u>hostname</u>,hardware)</div>
+<h2 id="sql-queries-12p">3 SQL queries (12p)</h2>
+<h3 id="p">3.1 (2p)</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb2-1"></a><span class="kw">SELECT</span> realname <span class="kw">FROM</span> Developers <span class="kw">WHERE</span> country<span class="op">=</span><span class="st">'Sweden'</span></span></code></pre></div>
+<h3 id="p-1">3.2 (3p)</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb3-1"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb3-1"></a><span class="kw">SELECT</span> name,owner,realname,country</span>
+<span id="cb3-2"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb3-2"></a><span class="kw">FROM</span> Projects <span class="kw">INNER</span> <span class="kw">JOIN</span> Developers <span class="kw">ON</span> owner<span class="op">=</span>alias</span></code></pre></div>
+<h3 id="p-2">3.3 (3p)</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb4-1"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb4-1"></a><span class="kw">SELECT</span> language,<span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> developer) <span class="kw">AS</span> popularity</span>
+<span id="cb4-2"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb4-2"></a><span class="kw">FROM</span> Contributions</span>
+<span id="cb4-3"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb4-3"></a><span class="kw">GROUP</span> <span class="kw">BY</span> language</span>
+<span id="cb4-4"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb4-4"></a><span class="kw">ORDER</span> <span class="kw">BY</span> popularity <span class="kw">DESC</span></span></code></pre></div>
+<h3 id="p-3">3.4 (4p)</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb5-1"></a><span class="kw">WITH</span> ProjectCountries <span class="kw">AS</span> (</span>
+<span id="cb5-2"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb5-2"></a>         <span class="kw">SELECT</span> name, country</span>
+<span id="cb5-3"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb5-3"></a>         <span class="kw">FROM</span> Projects <span class="kw">INNER</span> <span class="kw">JOIN</span> Developers <span class="kw">ON</span> owner<span class="op">=</span>alias),</span>
+<span id="cb5-4"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb5-4"></a>     ContributionCountries <span class="kw">AS</span> (</span>
+<span id="cb5-5"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb5-5"></a>         <span class="kw">SELECT</span> project <span class="kw">AS</span> name, country</span>
+<span id="cb5-6"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb5-6"></a>         <span class="kw">FROM</span> Contributions <span class="kw">INNER</span> <span class="kw">JOIN</span> Developers <span class="kw">ON</span> developer<span class="op">=</span>alias</span>
+<span id="cb5-7"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb5-7"></a>         <span class="kw">GROUP</span> <span class="kw">BY</span> name, country)</span>
+<span id="cb5-8"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb5-8"></a><span class="kw">SELECT</span> name, P.country, <span class="fu">COUNT</span>(C.country)</span>
+<span id="cb5-9"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb5-9"></a><span class="kw">FROM</span> ProjectCountries <span class="kw">as</span> P <span class="kw">INNER</span> <span class="kw">JOIN</span> ContributionCountries <span class="kw">as</span> C <span class="kw">USING</span> (name)</span>
+<span id="cb5-10"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb5-10"></a><span class="kw">WHERE</span> P.country<span class="op">&lt;&gt;</span>C.country</span>
+<span id="cb5-11"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb5-11"></a><span class="kw">GROUP</span> <span class="kw">BY</span> name,P.country</span>
+<span id="cb5-12"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb5-12"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="fu">COUNT</span>(C.country) <span class="kw">DESC</span>;</span></code></pre></div>
+<h2 id="algebra-and-theory-8p">4 Algebra and theory (8p)</h2>
+<h3 id="p-4">4.1 (5p)</h3>
+<p>The relational algebra query lists the project names and number of contributors for each project that has at least 100 contributors.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb6-1"></a><span class="kw">SELECT</span> project,<span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> developer)</span>
+<span id="cb6-2"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb6-2"></a><span class="kw">FROM</span> Contributions</span>
+<span id="cb6-3"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb6-3"></a><span class="kw">GROUP</span> <span class="kw">BY</span> project</span>
+<span id="cb6-4"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb6-4"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> developer)<span class="op">&gt;=</span><span class="dv">100</span>;</span></code></pre></div>
+<h3 id="p-5">4.2 (3p)</h3>
+<p>The query computes the intersection of the names of countries and the names and capitals, which we can instead do like this:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb7-1"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb7-1"></a>    <span class="kw">SELECT</span> name <span class="kw">from</span> Countries</span>
+<span id="cb7-2"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb7-2"></a><span class="kw">INTERSECT</span></span>
+<span id="cb7-3"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb7-3"></a>        <span class="kw">SELECT</span> capital <span class="kw">AS</span> name <span class="kw">FROM</span> Countries</span></code></pre></div>
+<h2 id="constraints-indexes-views-and-triggers-12p">5 Constraints, Indexes, Views and Triggers (12p)</h2>
+<h3 id="p-6">5.1 (3p)</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb8-1"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb8-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> Contributions(</span>
+<span id="cb8-2"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb8-2"></a>       developer TEXT <span class="kw">REFERENCES</span> Developers(alias),</span>
+<span id="cb8-3"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb8-3"></a>       <span class="dt">date</span>      <span class="dt">DATE</span>,</span>
+<span id="cb8-4"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb8-4"></a>       project   TEXT <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">REFERENCES</span> Projects(name),</span>
+<span id="cb8-5"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb8-5"></a>       language  TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb8-6"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb8-6"></a>       <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (developer,<span class="dt">date</span>));</span></code></pre></div>
+<h3 id="p-7">5.2 (2p)</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb9-1"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb9-1"></a><span class="kw">CREATE</span> <span class="kw">INDEX</span> developer_idx <span class="kw">ON</span> Contributions(developer);</span></code></pre></div>
+<h3 id="p-8">5.3 (3p)</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb10-1"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb10-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> ContributionsAndBugFixes <span class="kw">AS</span> (</span>
+<span id="cb10-2"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb10-2"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> Contributions <span class="kw">NATURAL</span> <span class="kw">LEFT</span> <span class="kw">OUTER</span> <span class="kw">JOIN</span> BugFixes</span>
+<span id="cb10-3"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb10-3"></a>);</span></code></pre></div>
+<h3 id="p-9">5.4 (4p)</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb11-1"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">FUNCTION</span> insert_contribution_or_bug_fix()</span>
+<span id="cb11-2"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-2"></a>RETURNS <span class="kw">TRIGGER</span> <span class="kw">AS</span> $$</span>
+<span id="cb11-3"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-3"></a><span class="cf">BEGIN</span></span>
+<span id="cb11-4"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-4"></a>  <span class="kw">INSERT</span> <span class="kw">INTO</span> Contributions <span class="kw">VALUES</span> (<span class="kw">NEW</span>.developer,<span class="kw">NEW</span>.<span class="dt">date</span>,</span>
+<span id="cb11-5"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-5"></a>                                    <span class="kw">NEW</span>.project,<span class="kw">NEW</span>.language);</span>
+<span id="cb11-6"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-6"></a>  <span class="cf">IF</span> <span class="kw">NEW</span>.severity <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="cf">THEN</span></span>
+<span id="cb11-7"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-7"></a>    <span class="kw">INSERT</span> <span class="kw">INTO</span> BugFixes <span class="kw">VALUES</span> (<span class="kw">NEW</span>.developer,<span class="kw">NEW</span>.<span class="dt">date</span>,<span class="kw">NEW</span>.severity);</span>
+<span id="cb11-8"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-8"></a>  <span class="cf">END</span> <span class="cf">IF</span>;</span>
+<span id="cb11-9"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-9"></a>  <span class="kw">RETURN</span> <span class="kw">NULL</span>;</span>
+<span id="cb11-10"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-10"></a><span class="cf">END</span></span>
+<span id="cb11-11"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-11"></a>$$ LANGUAGE plpgsql;</span>
+<span id="cb11-12"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-12"></a></span>
+<span id="cb11-13"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-13"></a><span class="kw">CREATE</span> <span class="kw">TRIGGER</span> insert_ContributionsAndBugFixes</span>
+<span id="cb11-14"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-14"></a>  <span class="kw">INSTEAD</span> <span class="kw">OF</span> <span class="kw">INSERT</span> <span class="kw">ON</span> ContributionsAndBugFixes</span>
+<span id="cb11-15"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb11-15"></a>    <span class="cf">FOR</span> <span class="kw">EACH</span> <span class="kw">ROW</span> <span class="kw">EXECUTE</span> <span class="kw">FUNCTION</span> insert_contribution_or_bug_fix();</span></code></pre></div>
+<h2 id="semi-structured-data-10p">6 Semi-structured data (10p)</h2>
+<h3 id="p-10">6.1 (5p)</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb12-1"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-1"></a><span class="kw">WITH</span> DeveloperContributionCounts <span class="kw">AS</span> (</span>
+<span id="cb12-2"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-2"></a>         <span class="kw">SELECT</span> project,alias,realname,country,<span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> <span class="fu">count</span></span>
+<span id="cb12-3"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-3"></a>         <span class="kw">FROM</span> Contributions <span class="kw">INNER</span> <span class="kw">JOIN</span> Developers <span class="kw">ON</span> developer<span class="op">=</span>alias</span>
+<span id="cb12-4"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-4"></a>         <span class="kw">GROUP</span> <span class="kw">BY</span> project,alias,realname),</span>
+<span id="cb12-5"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-5"></a></span>
+<span id="cb12-6"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-6"></a>    DevelopersWithContributions <span class="kw">AS</span> (</span>
+<span id="cb12-7"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-7"></a>        <span class="kw">SELECT</span> jsonb_build_object(</span>
+<span id="cb12-8"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-8"></a>                <span class="st">'alias'</span>,alias, <span class="st">'realname'</span>,realname, <span class="st">'country'</span>,country,</span>
+<span id="cb12-9"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-9"></a>                <span class="st">'contributions'</span>,jsonb_agg(jsonb_build_object(</span>
+<span id="cb12-10"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-10"></a>                                             <span class="st">'project'</span>,project,</span>
+<span id="cb12-11"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-11"></a>                                             <span class="st">'count'</span>,<span class="fu">count</span>))) <span class="kw">AS</span> dc</span>
+<span id="cb12-12"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-12"></a>    <span class="kw">FROM</span> DeveloperContributionCounts</span>
+<span id="cb12-13"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-13"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> alias,realname,country)</span>
+<span id="cb12-14"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-14"></a></span>
+<span id="cb12-15"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb12-15"></a><span class="kw">SELECT</span> jsonb_agg(dc) <span class="kw">FROM</span> DevelopersWithContributions;</span></code></pre></div>
+<h3 id="p-11">6.2 (5p)</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb13-1"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-1"></a><span class="fu">{</span><span class="dt">"type"</span><span class="fu">:</span><span class="st">"array"</span><span class="fu">,</span></span>
+<span id="cb13-2"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-2"></a> <span class="dt">"items"</span><span class="fu">:{</span></span>
+<span id="cb13-3"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-3"></a>     <span class="dt">"type"</span><span class="fu">:</span><span class="st">"object"</span><span class="fu">,</span></span>
+<span id="cb13-4"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-4"></a>     <span class="dt">"required"</span><span class="fu">:</span><span class="ot">[</span><span class="st">"alias"</span><span class="ot">,</span><span class="st">"realname"</span><span class="ot">,</span><span class="st">"country"</span><span class="ot">,</span><span class="st">"contributions"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb13-5"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-5"></a>     <span class="dt">"properties"</span><span class="fu">:{</span></span>
+<span id="cb13-6"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-6"></a>         <span class="dt">"alias"</span><span class="fu">:{</span><span class="dt">"type"</span><span class="fu">:</span><span class="st">"string"</span><span class="fu">},</span></span>
+<span id="cb13-7"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-7"></a>         <span class="dt">"realname"</span><span class="fu">:{</span><span class="dt">"type"</span><span class="fu">:</span><span class="st">"string"</span><span class="fu">},</span></span>
+<span id="cb13-8"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-8"></a>         <span class="dt">"country"</span><span class="fu">:{</span><span class="dt">"type"</span><span class="fu">:</span><span class="st">"string"</span><span class="fu">},</span></span>
+<span id="cb13-9"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-9"></a>         <span class="dt">"contributions"</span><span class="fu">:{</span></span>
+<span id="cb13-10"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-10"></a>             <span class="dt">"type"</span><span class="fu">:</span><span class="st">"array"</span><span class="fu">,</span></span>
+<span id="cb13-11"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-11"></a>             <span class="dt">"items"</span><span class="fu">:{</span></span>
+<span id="cb13-12"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-12"></a>                 <span class="dt">"type"</span><span class="fu">:</span><span class="st">"object"</span><span class="fu">,</span></span>
+<span id="cb13-13"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-13"></a>                 <span class="dt">"required"</span><span class="fu">:</span><span class="ot">[</span><span class="st">"project"</span><span class="ot">,</span><span class="st">"count"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb13-14"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-14"></a>                 <span class="dt">"properties"</span><span class="fu">:{</span></span>
+<span id="cb13-15"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-15"></a>                     <span class="dt">"project"</span><span class="fu">:{</span><span class="dt">"type"</span><span class="fu">:</span><span class="st">"string"</span><span class="fu">},</span></span>
+<span id="cb13-16"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-16"></a>                     <span class="dt">"count"</span><span class="fu">:{</span><span class="dt">"type"</span><span class="fu">:</span><span class="st">"number"</span><span class="fu">}</span></span>
+<span id="cb13-17"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-17"></a>                 <span class="fu">}</span></span>
+<span id="cb13-18"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-18"></a>             <span class="fu">}</span></span>
+<span id="cb13-19"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-19"></a>         <span class="fu">}</span></span>
+<span id="cb13-20"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-20"></a>     <span class="fu">}</span></span>
+<span id="cb13-21"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-21"></a> <span class="fu">}</span></span>
+<span id="cb13-22"><a href="https://www.cse.chalmers.se/edu/year/2020/course/TDA357/Exams/exam-solutions-2020-06.html#cb13-22"></a><span class="fu">}</span></span></code></pre></div>
+</main>
+
+
+</body></html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="20cm" height="16cm" viewBox="91 76 383 311" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="138" y="281" width="102.35" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="138" y="281" width="102.35" height="36"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="189.175" y="303">Component</text>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="132.55" cy="367.625" rx="40.55" ry="18"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="132.55" cy="367.625" rx="40.55" ry="18"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="132.55" y="371.625">partNr</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="112" y1="375.625" x2="153.1" y2="375.625"/>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="247.775" cy="367.625" rx="34.325" ry="18"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="247.775" cy="367.625" rx="34.325" ry="18"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="247.775" y="371.625">type</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="165.65" y="147.735" width="47.05" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="165.65" y="147.735" width="47.05" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="170.65" y="152.735" width="37.05" height="26"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="189.175" y="169.735">Pin</text>
+  </g>
+  <g>
+    <polygon style="fill: #ffffff" points="161.875,232.38 189.175,216 216.475,232.38 189.175,248.76 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="161.875,232.38 189.175,216 216.475,232.38 189.175,248.76 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="169.875,232.38 189.175,220.8 208.475,232.38 189.175,243.96 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="155.875" y="226.38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="222.475" y="226.38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="189.175" y="236.38">Of</text>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="132.55" y1="367.625" x2="132.55" y2="367.625"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="147.128" y1="349.958" x2="173.491" y2="318.008"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="233.111" y1="350.452" x2="205.406" y2="318.008"/>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="189.175" y1="270" x2="189.175" y2="249.764"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 184.175,275.004 A 5,5 0 1 0 194.175,274.996"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="189.175" y1="270" x2="189.175" y2="280"/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="189.175" y1="216" x2="189.175" y2="183.735"/>
+  <g>
+    <rect style="fill: #ffffff" x="402.825" y="147.735" width="56.75" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="402.825" y="147.735" width="56.75" height="36"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="431.2" y="169.735">Wire</text>
+  </g>
+  <g>
+    <polygon style="fill: #ffffff" points="251,165.735 307.225,132 363.45,165.735 307.225,199.47 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="251,165.735 307.225,132 363.45,165.735 307.225,199.47 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:sans-serif;font-style:normal;font-weight:normal" x="245" y="159.735"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="369.45" y="159.735"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="307.225" y="169.735">Connection</text>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="213.703" y1="165.735" x2="251" y2="165.735"/>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="363.45" y1="165.735" x2="398.353" y2="165.735"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="390.589,170.735 400.589,165.735 390.589,160.735 "/>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="189.175" cy="95.225" rx="44.975" ry="18"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="189.175" cy="95.225" rx="44.975" ry="18"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="189.175" y="99.225">number</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 6; stroke: #000000" x1="164.2" y1="103.225" x2="214.15" y2="103.225"/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="189.175" y1="114.092" x2="189.175" y2="146.868"/>
+  <g>
+    <ellipse style="fill: #ffffff" cx="431.2" cy="95.225" rx="40.85" ry="18"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="431.2" cy="95.225" rx="40.85" ry="18"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="431.2" y="99.225">wireNr</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="410.35" y1="103.225" x2="452.05" y2="103.225"/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="431.2" y1="114.092" x2="431.2" y2="146.868"/>
+</svg>

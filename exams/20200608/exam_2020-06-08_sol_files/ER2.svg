@@ -1,0 +1,203 @@
+<svg width="456pt" height="412pt" viewBox="0.00 0.00 456.00 412.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 408)">
+<title>ER</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-408 452,-408 452,4 -4,4"></polygon>
+<!-- Product -->
+<g id="node1" class="node">
+<title>Product</title>
+<polygon fill="none" stroke="#000000" points="152.9035,-328.6383 98.9035,-328.6383 98.9035,-292.6383 152.9035,-292.6383 152.9035,-328.6383"></polygon>
+<text text-anchor="middle" x="125.9035" y="-308.1383" font-family="Times,serif" font-size="10.00" fill="#000000">Product</text>
+</g>
+<!-- Product_productNumber -->
+<g id="node2" class="node">
+<title>Product_productNumber</title>
+<ellipse fill="none" stroke="#000000" cx="134.2645" cy="-355.8104" rx="50.7503" ry="18"></ellipse>
+<text text-anchor="middle" x="134.2645" y="-353.3104" font-family="Times,serif" font-size="10.00" fill="#000000">_productNumber</text>
+</g>
+<!-- Product_productNumber&#45;&gt;Product -->
+<g id="edge1" class="edge">
+<title>Product_productNumber-&gt;Product</title>
+<path fill="none" stroke="#000000" d="M130.9119,-337.6975C130.3667,-334.752 129.802,-331.7009 129.2568,-328.7553"></path>
+</g>
+<!-- Product_description -->
+<g id="node3" class="node">
+<title>Product_description</title>
+<ellipse fill="none" stroke="#000000" cx="43.1894" cy="-264.7148" rx="36.4942" ry="18"></ellipse>
+<text text-anchor="middle" x="43.1894" y="-262.2148" font-family="Times,serif" font-size="10.00" fill="#000000">description</text>
+</g>
+<!-- Product_description&#45;&gt;Product -->
+<g id="edge2" class="edge">
+<title>Product_description-&gt;Product</title>
+<path fill="none" stroke="#000000" d="M67.559,-278.245C77.3756,-283.6952 88.7377,-290.0036 98.8126,-295.5973"></path>
+</g>
+<!-- Product_unitPrice -->
+<g id="node4" class="node">
+<title>Product_unitPrice</title>
+<ellipse fill="none" stroke="#000000" cx="31.1912" cy="-329.6536" rx="31.3996" ry="18"></ellipse>
+<text text-anchor="middle" x="31.1912" y="-327.1536" font-family="Times,serif" font-size="10.00" fill="#000000">unitPrice</text>
+</g>
+<!-- Product_unitPrice&#45;&gt;Product -->
+<g id="edge3" class="edge">
+<title>Product_unitPrice-&gt;Product</title>
+<path fill="none" stroke="#000000" d="M60.8989,-323.6892C73.0509,-321.2495 87.0122,-318.4465 98.8736,-316.0651"></path>
+</g>
+<!-- Customer -->
+<g id="node5" class="node">
+<title>Customer</title>
+<polygon fill="none" stroke="#000000" points="274.106,-189.9122 218.106,-189.9122 218.106,-153.9122 274.106,-153.9122 274.106,-189.9122"></polygon>
+<text text-anchor="middle" x="246.106" y="-169.4122" font-family="Times,serif" font-size="10.00" fill="#000000">Customer</text>
+</g>
+<!-- Customer_customerNumber -->
+<g id="node6" class="node">
+<title>Customer_customerNumber</title>
+<ellipse fill="none" stroke="#000000" cx="142.1728" cy="-217.4759" rx="54.3144" ry="18"></ellipse>
+<text text-anchor="middle" x="142.1728" y="-214.9759" font-family="Times,serif" font-size="10.00" fill="#000000">_customerNumber</text>
+</g>
+<!-- Customer_customerNumber&#45;&gt;Customer -->
+<g id="edge4" class="edge">
+<title>Customer_customerNumber-&gt;Customer</title>
+<path fill="none" stroke="#000000" d="M175.0579,-203.0592C188.8552,-197.0106 204.7364,-190.0484 217.9801,-184.2424"></path>
+</g>
+<!-- Customer_name -->
+<g id="node7" class="node">
+<title>Customer_name</title>
+<ellipse fill="none" stroke="#000000" cx="301.779" cy="-97.2205" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="301.779" y="-94.7205" font-family="Times,serif" font-size="10.00" fill="#000000">name</text>
+</g>
+<!-- Customer_name&#45;&gt;Customer -->
+<g id="edge5" class="edge">
+<title>Customer_name-&gt;Customer</title>
+<path fill="none" stroke="#000000" d="M289.6988,-113.4275C280.8083,-125.3551 268.7205,-141.5723 259.5285,-153.9043"></path>
+</g>
+<!-- Customer_address -->
+<g id="node8" class="node">
+<title>Customer_address</title>
+<ellipse fill="none" stroke="#000000" cx="338.7205" cy="-166.7024" rx="27.8353" ry="18"></ellipse>
+<text text-anchor="middle" x="338.7205" y="-164.2024" font-family="Times,serif" font-size="10.00" fill="#000000">address</text>
+</g>
+<!-- Customer_address&#45;&gt;Customer -->
+<g id="edge6" class="edge">
+<title>Customer_address-&gt;Customer</title>
+<path fill="none" stroke="#000000" d="M310.9331,-168.2655C299.3177,-168.9189 285.8411,-169.677 274.1939,-170.3322"></path>
+</g>
+<!-- Customer_email -->
+<g id="node9" class="node">
+<title>Customer_email</title>
+<ellipse fill="none" stroke="#000000" cx="146.6985" cy="-163.4035" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="146.6985" y="-160.9035" font-family="Times,serif" font-size="10.00" fill="#000000">email</text>
+</g>
+<!-- Customer_email&#45;&gt;Customer -->
+<g id="edge7" class="edge">
+<title>Customer_email-&gt;Customer</title>
+<path fill="none" stroke="#000000" d="M173.5996,-165.7061C187.2846,-166.8774 203.9139,-168.3008 217.7933,-169.4888"></path>
+</g>
+<!-- LoyalCustomer -->
+<g id="node10" class="node">
+<title>LoyalCustomer</title>
+<polygon fill="none" stroke="#000000" points="141.5334,-88.893 61.5334,-88.893 61.5334,-52.893 141.5334,-52.893 141.5334,-88.893"></polygon>
+<text text-anchor="middle" x="101.5334" y="-68.393" font-family="Times,serif" font-size="10.00" fill="#000000">LoyalCustomer</text>
+</g>
+<!-- isa_LoyalCustomer_Customer -->
+<g id="node12" class="node">
+<title>isa_LoyalCustomer_Customer</title>
+<polygon fill="none" stroke="#000000" points="209.3527,-132.1838 171.5031,-103.6838 247.2024,-103.6838 209.3527,-132.1838"></polygon>
+<text text-anchor="middle" x="209.3527" y="-110.6838" font-family="Times,serif" font-size="10.00" fill="#000000">ISA</text>
+</g>
+<!-- LoyalCustomer&#45;&gt;isa_LoyalCustomer_Customer -->
+<g id="edge9" class="edge">
+<title>LoyalCustomer-&gt;isa_LoyalCustomer_Customer</title>
+<path fill="none" stroke="#000000" d="M141.6813,-86.6405C156.1704,-92.3237 172.0808,-98.5644 184.8321,-103.5659"></path>
+</g>
+<!-- LoyalCustomer_discount -->
+<g id="node11" class="node">
+<title>LoyalCustomer_discount</title>
+<ellipse fill="none" stroke="#000000" cx="149.6862" cy="-18.3779" rx="30.7213" ry="18"></ellipse>
+<text text-anchor="middle" x="149.6862" y="-15.8779" font-family="Times,serif" font-size="10.00" fill="#000000">discount</text>
+</g>
+<!-- LoyalCustomer_discount&#45;&gt;LoyalCustomer -->
+<g id="edge8" class="edge">
+<title>LoyalCustomer_discount-&gt;LoyalCustomer</title>
+<path fill="none" stroke="#000000" d="M134.9771,-34.4195C129.6668,-40.2109 123.6362,-46.7878 118.1723,-52.7467"></path>
+</g>
+<!-- isa_LoyalCustomer_Customer&#45;&gt;Customer -->
+<g id="edge10" class="edge">
+<title>isa_LoyalCustomer_Customer-&gt;Customer</title>
+<path fill="none" stroke="#000000" d="M217.5095,-126.2176C220.9989,-131.7934 225.2092,-138.521 229.3133,-145.079"></path>
+<polyline fill="none" stroke="#000000" points="234.7664,-153.7925 229.4613,-145.3156 "></polyline>
+<path fill="none" stroke="#000000" d="M236.3523,-146.9016C239.677,-152.5528 231.624,-157.8578 227.8754,-152.2066"></path>
+</g>
+<!-- Order -->
+<g id="node13" class="node">
+<title>Order</title>
+<polygon fill="none" stroke="#000000" points="349.3189,-324.7637 295.3189,-324.7637 295.3189,-288.7637 349.3189,-288.7637 349.3189,-324.7637"></polygon>
+<text text-anchor="middle" x="322.3189" y="-304.2637" font-family="Times,serif" font-size="10.00" fill="#000000">Order</text>
+</g>
+<!-- Order_orderNumber -->
+<g id="node14" class="node">
+<title>Order_orderNumber</title>
+<ellipse fill="none" stroke="#000000" cx="403.6776" cy="-255.2051" rx="44.978" ry="18"></ellipse>
+<text text-anchor="middle" x="403.6776" y="-252.7051" font-family="Times,serif" font-size="10.00" fill="#000000">_orderNumber</text>
+</g>
+<!-- Order_orderNumber&#45;&gt;Order -->
+<g id="edge11" class="edge">
+<title>Order_orderNumber-&gt;Order</title>
+<path fill="none" stroke="#000000" d="M379.2673,-270.6744C369.9061,-276.6068 359.1687,-283.4113 349.5587,-289.5014"></path>
+</g>
+<!-- Order_date -->
+<g id="node15" class="node">
+<title>Order_date</title>
+<ellipse fill="none" stroke="#000000" cx="346.296" cy="-386.3747" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="346.296" y="-383.8747" font-family="Times,serif" font-size="10.00" fill="#000000">date</text>
+</g>
+<!-- Order_date&#45;&gt;Order -->
+<g id="edge12" class="edge">
+<title>Order_date-&gt;Order</title>
+<path fill="none" stroke="#000000" d="M340.9747,-368.7064C337.0565,-355.6968 331.7451,-338.0613 327.7916,-324.9345"></path>
+</g>
+<!-- OrderBy -->
+<g id="node16" class="node">
+<title>OrderBy</title>
+<polygon fill="none" stroke="#000000" points="266.2636,-236.5101 223.1831,-218.5101 266.2636,-200.5101 309.3441,-218.5101 266.2636,-236.5101"></polygon>
+<text text-anchor="middle" x="266.2636" y="-216.0101" font-family="Times,serif" font-size="10.00" fill="#000000">OrderBy</text>
+</g>
+<!-- OrderBy&#45;&gt;Customer -->
+<g id="edge14" class="edge">
+<title>OrderBy-&gt;Customer</title>
+<path fill="none" stroke="#000000" d="M259.6632,-203.2522C259.0891,-201.9251 258.4979,-200.5583 257.8983,-199.1722"></path>
+<polyline fill="none" stroke="#000000" points="253.9139,-189.9615 257.8842,-199.1396 "></polyline>
+<path fill="none" stroke="#000000" d="M251.31,-196.5357C248.8926,-190.417 257.6117,-186.4467 260.4881,-192.5654"></path>
+</g>
+<!-- OrderBy&#45;&gt;Order -->
+<g id="edge13" class="edge">
+<title>OrderBy-&gt;Order</title>
+<path fill="none" stroke="#000000" d="M275.52,-233.0834C285.1598,-248.2604 300.2826,-272.0697 310.7149,-288.4943"></path>
+</g>
+<!-- OrderLine -->
+<g id="node17" class="node">
+<title>OrderLine</title>
+<polygon fill="none" stroke="#000000" points="218.9306,-316.4617 169.6959,-298.4617 218.9306,-280.4617 268.1653,-298.4617 218.9306,-316.4617"></polygon>
+<text text-anchor="middle" x="218.9306" y="-295.9617" font-family="Times,serif" font-size="10.00" fill="#000000">OrderLine</text>
+</g>
+<!-- OrderLine&#45;&gt;Product -->
+<g id="edge17" class="edge">
+<title>OrderLine-&gt;Product</title>
+<path fill="none" stroke="#000000" d="M182.4308,-303.2393C172.6575,-304.5185 162.265,-305.8788 153.0921,-307.0795"></path>
+</g>
+<!-- OrderLine&#45;&gt;Order -->
+<g id="edge16" class="edge">
+<title>OrderLine-&gt;Order</title>
+<path fill="none" stroke="#000000" d="M259.4956,-301.719C271.4889,-302.6821 284.3212,-303.7125 295.2414,-304.5894"></path>
+</g>
+<!-- OrderLine_quantity -->
+<g id="node18" class="node">
+<title>OrderLine_quantity</title>
+<ellipse fill="none" stroke="#000000" cx="235.1491" cy="-358.6027" rx="30.0436" ry="18"></ellipse>
+<text text-anchor="middle" x="235.1491" y="-356.1027" font-family="Times,serif" font-size="10.00" fill="#000000">quantity</text>
+</g>
+<!-- OrderLine_quantity&#45;&gt;OrderLine -->
+<g id="edge15" class="edge">
+<title>OrderLine_quantity-&gt;OrderLine</title>
+<path fill="none" stroke="#000000" d="M230.283,-340.5584C228.081,-332.3929 225.497,-322.811 223.351,-314.8532"></path>
+</g>
+</g>
+</svg>
