@@ -1,0 +1,32 @@
+CREATE TABLE Customers (
+
+	idnr INT PRIMARY KEY,
+	name TEXT,
+	privateCustomer BOOLEAN
+)
+
+CREATE TABLE Subscriptions
+	customer INT,
+	number INT PRIMARY KEY,
+	plan TEXT,
+	monthlyFee INT,
+	balance INT
+
+	CHECK(monthlyFee >= 0)							// d.)
+	CHECK(plan IN ('prepaid', 'flatrate', 'corporate'))			// a.)
+	CHECK(balance == 0 OR plan == 'prepaid')				// b.)
+	CHECK(plan != 'corporate' OR NOT					// c.)
+					(SELECT privateCustomer
+					FROM Customers
+					WHERE idnr = customer)
+
+	FOREIGN KEY customer REFERENCES Customers(idnr) ON DELETE CASCADE	// e.)
+
+CREATE VIEW CustomersPretty (
+	SELECT *, COALESCE(SUM(s.monthlyFee), 0) AS monthlyBilling		// d.)
+	FROM Customers
+	LEFT JOIN Subscriptions s ON Customers.idnr = Subscriptions.customer
+
+CREATE TRIGGER delete_customer
+	AFTER DELETE
+	ON Subscriptions
