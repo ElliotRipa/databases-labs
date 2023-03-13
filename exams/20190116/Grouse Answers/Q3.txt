@@ -1,0 +1,26 @@
+a.)
+
+SELECT u.username, u.email COALESCE(COUNT(f.follower), 0)
+FROM Users u
+LEFT JOIN Follows f ON f.follows = u.username
+GROUP BY u.username;
+
+
+b.)
+
+SELECT u.username, f.follows
+FROM Users u
+LEFT JOIN Follows f ON f.follower = u.username
+WHERE u.username NOT IN 
+	(SELECT f2.followers
+	FROM Follows f2
+	WHERE f2.follows = f.follows);
+
+
+c.)
+
+SELECT DISTINCT f.follower
+FROM Follows f
+WHERE f.follows IN	(SELECT f.follower
+			FROM Follows f
+			WHERE f.follows = 'jonas');
