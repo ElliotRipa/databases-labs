@@ -1,0 +1,16 @@
+[
+	{"name": "Starters", "types": {"name": "Calamari", "price": 8.5}},
+	{"name": "Salads", "types": [
+		{"name": "Ceasar", "price": 8.5},
+		{"name": "Chicken", "price": 9.25}
+	]},
+	{"name": "Burgers", "types": [
+		{"name": "Standard", "price": 9},
+		{"name": "Bacon", "price": 10},
+		{"name": "Vegetarian burgers", "types": [
+			{"name": "Haloumi", "price": 12},
+			{"name": "Mushroom", "price": 10}
+		]
+	]
+]
+
